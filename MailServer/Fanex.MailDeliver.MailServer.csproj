@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B45C3D2E-03FD-4223-95CE-73AC94EC7192}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.MailDeliver.MailServer</RootNamespace>
+    <AssemblyName>Fanex.MailDeliver.MailServer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Fanex.MailDeliver.MailServer.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fanex.Caching">
+      <HintPath>..\_Dependencies\Fanex.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data, Version=1.0.111.9, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\_Dependencies\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Selectors" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ServiceInstaller.Designer.cs">
+      <DependentUpon>ServiceInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service\IMailService.cs" />
+    <Compile Include="Service\MailService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Service\WinMailService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service\WinMailService.Designer.cs">
+      <DependentUpon>WinMailService.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="InstallMailService.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UnInstallMailService.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configurations\StoreProcedureName.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SQL\MailRecorder_UpdateMailStatus.sql" />
+    <Content Include="SQL\MailRecorder_GetConfig.sql" />
+    <Content Include="SQL\MailRecorder_GetFucntion.sql" />
+    <Content Include="SQL\MailRecorder_GetListConfig.sql" />
+    <Content Include="SQL\MailRecorder_GetListFuntion.sql" />
+    <Content Include="SQL\MailRecorder_GetListMail.sql" />
+    <Content Include="SQL\MailRecorder_GetListMailByDate.sql" />
+    <Content Include="SQL\MailRecorder_GetListSetting.sql" />
+    <Content Include="SQL\MailRecorder_GetMail.sql" />
+    <Content Include="SQL\MailRecorder_GetMailAttachement.sql" />
+    <Content Include="SQL\MailRecorder_GetMailLinkedResource.sql" />
+    <Content Include="SQL\MailRecorder_GetSetting.sql" />
+    <Content Include="SQL\MailRecorder_InsConfig.sql" />
+    <Content Include="SQL\MailRecorder_InsFunction.sql" />
+    <Content Include="SQL\MailRecorder_InsMailAttachement.sql" />
+    <Content Include="SQL\MailRecorder_InsMailLinkedResource.sql" />
+    <Content Include="SQL\MailRecorder_InsRecord.sql" />
+    <Content Include="SQL\MailRecorder_InsSetting.sql" />
+    <Content Include="SQL\MailRecorder_UpdateCountSent.sql" />
+    <Content Include="SQL\MailRecord_InsError.sql" />
+    <Content Include="SQL\Table\Tbl_Mail_Attachment.sql" />
+    <Content Include="SQL\Table\Tbl_Mail_Config.sql" />
+    <Content Include="SQL\Table\Tbl_Mail_Function.sql" />
+    <Content Include="SQL\Table\Tbl_Mail_LinkedResource.sql" />
+    <Content Include="SQL\Table\Tbl_Mail_Record.sql" />
+    <Content Include="SQL\Table\Tbl_Mail_Setting.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.MailDeliver.Core\Fanex.MailDeliver.Core.csproj">
+      <Project>{28AE521B-BA14-41B0-9869-01E712F4B192}</Project>
+      <Name>Fanex.MailDeliver.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MailClient\Fanex.MailDeliver.MailClient.csproj">
+      <Project>{913EA85E-0247-4E48-B9B1-279E2EB10380}</Project>
+      <Name>MailClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

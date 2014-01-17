@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{28AE521B-BA14-41B0-9869-01E712F4B192}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.MailDeliver.Core</RootNamespace>
+    <AssemblyName>Fanex.MailDeliver.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EASendMail40">
+      <HintPath>..\_Dependencies\EASendMail40.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common">
+      <HintPath>..\_Dependencies\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\_Dependencies\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging">
+      <HintPath>..\_Dependencies\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core">
+      <HintPath>..\_Dependencies\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\_Dependencies\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\Implement\MailDeliverBusiness.cs" />
+    <Compile Include="Business\Implement\MailExtension.cs" />
+    <Compile Include="Business\Interface\IMailDeliverBusiness.cs" />
+    <Compile Include="Business\TableCaching\MemConfig.cs" />
+    <Compile Include="Business\TableCaching\MemFunction.cs" />
+    <Compile Include="Business\TableCaching\MemInstance.cs" />
+    <Compile Include="Business\TableCaching\MemSetting.cs" />
+    <Compile Include="Business\TableCaching\MemTable.cs" />
+    <Compile Include="Business\Worker\ResendMailWorker.cs" />
+    <Compile Include="Business\Worker\SendMailWorker.cs" />
+    <Compile Include="Criterias\GetMailErrorCriteria.cs" />
+    <Compile Include="Criterias\InsertMailErrorCriteria.cs" />
+    <Compile Include="DataAccess\Implement\MailDeliverDataAccess.cs" />
+    <Compile Include="DataAccess\Implement\MailAttachmentManager.cs" />
+    <Compile Include="DataAccess\Implement\LinkedResourcesManager.cs" />
+    <Compile Include="DataAccess\Interface\IMailDeliverDataAccess.cs" />
+    <Compile Include="Infrastructure\Configurations\AppSettings.cs" />
+    <Compile Include="Infrastructure\Configurations\LoggerErrorSection.cs" />
+    <Compile Include="Infrastructure\Configurations\MailSection.cs" />
+    <Compile Include="Infrastructure\Configurations\StorageAdapter.cs" />
+    <Compile Include="Infrastructure\Constant.cs" />
+    <Compile Include="Infrastructure\ExtensionMethod\ExtensionClass.cs" />
+    <Compile Include="Infrastructure\Logging\LogExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MailClient\Fanex.MailDeliver.MailClient.csproj">
+      <Project>{913EA85E-0247-4E48-B9B1-279E2EB10380}</Project>
+      <Name>Fanex.MailDeliver.MailClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

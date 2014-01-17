@@ -1,0 +1,136 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="Program.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2012.9.21">Created</change>
+// </history>
+
+namespace MailTest
+{
+    using System;
+    using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Reflection;
+    using Fanex.MailDeliver.Model;
+
+    /// <summary>
+    /// First running program.
+    /// </summary>
+    [SuppressMessage(
+            "StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+    internal class Program
+    {
+        /// <summary>
+        /// First running information.
+        /// </summary>
+        /// <param name="args">Function arguments.</param>
+        private static void Main(string[] args)
+        {
+            try
+            {
+                using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
+                {
+                    try
+                    {
+                        ////#endregion test insert mail record
+                        var mailItem = new MailRecord
+                        {
+                            ////MailFrom = "demo@gmail.com",
+                            MailTo = ConfigurationManager.AppSettings.Get("mail_to"),
+                            Subject = "Demo Send Mail Subject",
+                            Title = "Demo Send Mail Title",
+                            Body = "Body test",
+                            IsEncrypt = Convert.ToBoolean(ConfigurationManager.AppSettings["isencrypt"])
+                        };
+                        client.SendMail(mailItem);
+
+                        ////var mailItem = new MailRecord
+                        ////{
+                        ////    MailTo = "ricky.nguyen@nexcel.vn;nbhuy89@gmail.com",
+                        ////    Subject = "Demo Send Mail",
+                        ////    Title = "Demo Send Mail",
+                        ////    Body = "From Old Service"
+                        ////};
+                        ////mailItem.Attachments = new List<MailAttachment>();
+                        ////var attachment = new MailAttachment(@"D:\App.txt", FileExtentions.TEXT);
+                        ////mailItem.Attachments.Add(attachment);
+                        ////client.SendMail(mailItem);
+                        ////client.ReSendMail(45202);
+                        ////var list = client.GetListConfig(string.Empty);
+
+                        ////var config = client.GetConfig(1);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
+                    Console.WriteLine("OK");
+                    Console.ReadLine();
+                }
+            }
+            catch (Exception ex)
+            {
+                string theDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var outPath = string.Empty;
+                outPath = string.Format(@"{0}\Logs\Error", theDirectory);
+
+                if (!Directory.Exists(outPath))
+                {
+                    Directory.CreateDirectory(outPath);
+                }
+
+                outPath += string.Format(@"\{0:yyyy-MM-dd}.txt", DateTime.Now.Date);
+
+                var fs = new FileStream(outPath, FileMode.Append, FileAccess.Write);
+                var sw = new StreamWriter(fs);
+
+                sw.WriteLine(DateTime.Now + ": " + ex.Message);
+
+                sw.Close();
+                fs.Close();
+            }
+        }
+
+        ////private static void TestMail()
+        ////{
+        ////    var mailItem = new MailRecord
+        ////    {
+        ////        MailTo = "bobby.nguyen@nexcel.vn",
+        ////        Subject = "Subject",
+        ////        Title = "Title",
+        ////        Body = "Body test", //IsBodyHtml ready
+        ////        MailBcc = string.Empty,
+        ////        MailCc = string.Empty
+        ////    };
+
+        ////    #region send mail with attachment
+
+        ////    mailItem.Attachments = new List<MailAttachment>();
+        ////    //var attachment = new Fanex.MailDeliver.Model.MailAttachment(@"File_Path", FileExtentions.MS_EXCEL);
+        ////    //mailItem.Attachments.Add(attachment);
+
+        ////    #endregion send mail with attachment
+
+        ////    #region send mail with AlternateView
+
+        ////    mailItem.Body += "Image AlternateView <img cid=\"1a2s3d4f5g\" />";
+        ////    mailItem.AlternateView = new List<MailLinkedResource>();
+        ////    //var resource = new Fanex.MailDeliver.Model.MailLinkedResource(@"File_image_path", FileExtentions.IMG_PNG, "1a2s3d4f5g");
+        ////    //mailItem.AlternateView.Add(resource);
+
+        ////    #endregion send mail with AlternateView
+
+        ////    using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
+        ////    {
+        ////        // call send mail service
+        ////        client.SendMail(mailItem);
+        ////    }
+        ////}
+    }
+}
