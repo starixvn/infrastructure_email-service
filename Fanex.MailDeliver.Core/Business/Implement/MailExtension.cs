@@ -158,6 +158,8 @@ namespace Fanex.MailDeliver.Business
                         client.EnableSsl = true;
                     }
 
+                    System.Net.ServicePointManager.ServerCertificateValidationCallback += (s, cert, chain, sslPolicyErrors) => true;
+
                     client.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
                     client.SendAsync(msg, mailSend);
                 }

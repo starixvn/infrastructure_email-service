@@ -60,7 +60,7 @@ namespace MailTest
                         ////var attachment = new MailAttachment(@"D:\App.txt", FileExtentions.TEXT);
                         ////mailItem.Attachments.Add(attachment);
                         ////client.SendMail(mailItem);
-                        ////client.ReSendMail(45202);
+                        ////client.ReSendMail(51778);
                         ////var list = client.GetListConfig(string.Empty);
 
                         ////var config = client.GetConfig(1);
