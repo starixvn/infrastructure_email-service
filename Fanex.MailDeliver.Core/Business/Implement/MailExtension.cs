@@ -116,7 +116,7 @@ namespace Fanex.MailDeliver.Business
                     msg.IsBodyHtml = true;
                     msg.Body = mailSend.Body;
                     msg.BodyEncoding = Encoding.UTF8;
-                    msg.Priority = System.Net.Mail.MailPriority.Low;
+                    msg.Priority = System.Net.Mail.MailPriority.High;
 
                     var attInfo = MailSection.Instance.Attachment;
                     var attachments = mailSend.Attachments;
