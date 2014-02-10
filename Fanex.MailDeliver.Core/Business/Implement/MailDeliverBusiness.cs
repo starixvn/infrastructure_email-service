@@ -22,6 +22,7 @@ namespace Fanex.MailDeliver.Business.Implement
     using Fanex.MailDeliver.MailClient.Util;
     using Fanex.MailDeliver.Model;
     using Fanex.NAP.Framework.Data;
+    using log4net.Core;
 
     /// <summary>
     /// Handle Management Mail.
@@ -59,7 +60,11 @@ namespace Fanex.MailDeliver.Business.Implement
             }
             catch (Exception ex)
             {
-                LogExtension.LogError(ex);
+                //// Log Email Error
+                //// nLog
+                LogExtension.WriteLog(Level.Error, ex.ToString());
+                //// Fannex Logging
+                Fanex.Logging.Logger.Log.Error(ex.Message + " - " + mailRecord.Subject, ex);
             }
 
             return 0;
