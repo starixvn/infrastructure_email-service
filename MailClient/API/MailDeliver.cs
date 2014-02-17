@@ -104,13 +104,17 @@ namespace Fanex.MailDeliver.MailClient.API
         {
             if (mail != null)
             {
-                if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("app_mail_id")))
+                if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings.Get("app_mail_id")) 
+                    || (mail.Config != null && mail.Config.AppID > 0))
                 {
-                    var appid = Convert.ToInt32(ConfigurationManager.AppSettings["app_mail_id"]);
-                    mail.Config = new MailConfig
+                    if (mail.Config == null || mail.Config.AppID == 0)
                     {
-                        AppID = appid
-                    };
+                        var appid = Convert.ToInt32(ConfigurationManager.AppSettings["app_mail_id"]);
+                        mail.Config = new MailConfig
+                        {
+                            AppID = appid
+                        };
+                    }
 
                     Util.AttachmentUtil.Format(ref mail);
 
