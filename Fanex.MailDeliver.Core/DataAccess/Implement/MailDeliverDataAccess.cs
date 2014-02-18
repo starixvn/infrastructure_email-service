@@ -40,12 +40,12 @@ namespace Fanex.MailDeliver.DataAccess.Implement
             param.Add("mailid", mailRecord.MailID);
             param.Add("appid", mailRecord.Config != null ? mailRecord.Config.AppID : mailRecord.AppID);
             param.Add("funcid", mailRecord.Function != null ? mailRecord.Function.FuncID : mailRecord.FuncID);
-            param.Add("mailto", mailRecord.MailTo ?? string.Empty);
-            param.Add("mailcc", mailRecord.MailCc);
-            param.Add("mailbcc", mailRecord.MailBcc);
+            param.Add("mailto", mailRecord.IsEncrypt ? Cryptography.CfsEnCrypt(mailRecord.MailTo ?? string.Empty) : mailRecord.MailTo);
+            param.Add("mailcc", mailRecord.IsEncrypt ? Cryptography.CfsEnCrypt(mailRecord.MailCc ?? string.Empty) : mailRecord.MailCc);
+            param.Add("mailbcc", mailRecord.IsEncrypt ? Cryptography.CfsEnCrypt(mailRecord.MailBcc ?? string.Empty) : mailRecord.MailBcc);
             param.Add("title", mailRecord.Title);
             param.Add("subject", mailRecord.Subject);
-            param.Add("body", mailRecord.Body);
+            param.Add("body", mailRecord.IsEncrypt ? Cryptography.CfsEnCrypt(mailRecord.Body ?? string.Empty) : mailRecord.Body);
             param.Add("maildate", DateTime.Now);
             param.Add("attachments", string.Empty);
             param.Add("isencrypt", mailRecord.IsEncrypt);

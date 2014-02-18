@@ -13,6 +13,7 @@ namespace Fanex.MailDeliver.Business.Implement
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Fanex.Common;
     using Fanex.MailDeliver.Business.Interface;
     using Fanex.MailDeliver.Business.TableCaching;
     using Fanex.MailDeliver.Core.Criterias;
@@ -85,6 +86,7 @@ namespace Fanex.MailDeliver.Business.Implement
                 }
 
                 var record = _mailDeliverDataAccess.GetMailRecord(mailID, false);
+
                 if (record != null)
                 {
                     var stream = MailFormatter.Serialize(record);
@@ -109,7 +111,17 @@ namespace Fanex.MailDeliver.Business.Implement
         {
             try
             {
-                return _mailDeliverDataAccess.GetMailRecord(mailID, isSend);
+                var mailRecord = _mailDeliverDataAccess.GetMailRecord(mailID, isSend);
+
+                if (isSend && mailRecord.IsEncrypt)
+                {
+                    mailRecord.MailTo = Cryptography.CfsDeCrypt(mailRecord.MailTo);
+                    mailRecord.MailCc = Cryptography.CfsDeCrypt(mailRecord.MailCc);
+                    mailRecord.MailBcc = Cryptography.CfsDeCrypt(mailRecord.MailBcc);
+                    mailRecord.Body = Cryptography.CfsDeCrypt(mailRecord.Body);
+                }
+
+                return mailRecord;
             }
             catch (Exception ex)
             {

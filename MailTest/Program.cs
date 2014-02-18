@@ -42,9 +42,9 @@ namespace MailTest
                         {
                             ////MailFrom = "demo@gmail.com",
                             MailTo = ConfigurationManager.AppSettings.Get("mail_to"),
-                            Subject = "Demo Send Mail Subject",
-                            Title = "Demo Send Mail Title",
-                            Body = "Body test",
+                            Subject = "Demo Send Mail Subject Test Test Test Test",
+                            Title = "Demo Send Mail Title Test Test Test Test Test",
+                            Body = "Body test Body testBody testBody testBody testBod",
                             IsEncrypt = Convert.ToBoolean(ConfigurationManager.AppSettings["isencrypt"])
                         };
                         client.SendMail(mailItem);
@@ -60,7 +60,7 @@ namespace MailTest
                         ////var attachment = new MailAttachment(@"D:\App.txt", FileExtentions.TEXT);
                         ////mailItem.Attachments.Add(attachment);
                         ////client.SendMail(mailItem);
-                        ////client.ReSendMail(51778);
+                        ////client.ReSendMail(54031);
                         ////var list = client.GetListConfig(string.Empty);
 
                         ////var config = client.GetConfig(1);
