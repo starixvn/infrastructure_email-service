@@ -57,6 +57,14 @@ namespace Fanex.MailDeliver.Business.Implement
                     return 0;
                 }
 
+                //// Get Mail Config
+                var currentAppId = mailRecord.Config != null ? mailRecord.Config.AppID : mailRecord.AppID;
+                var currentApp = _mailDeliverDataAccess.GetMailConfig(currentAppId);
+                if (currentApp != null)
+                {
+                    mailRecord.IsEncrypt = currentApp.IsEncrypt;
+                }
+
                 return _mailDeliverDataAccess.InsertMailRecord(mailRecord);
             }
             catch (Exception ex)
