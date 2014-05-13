@@ -60,7 +60,7 @@ namespace Fanex.MailDeliver.Business.Implement
                 //// Get Mail Config
                 var currentAppId = mailRecord.Config != null ? mailRecord.Config.AppID : mailRecord.AppID;
                 var currentApp = _mailDeliverDataAccess.GetMailConfig(currentAppId);
-                if (currentApp != null)
+                if (currentApp != null && currentApp.IsEncrypt)
                 {
                     mailRecord.IsEncrypt = currentApp.IsEncrypt;
                 }

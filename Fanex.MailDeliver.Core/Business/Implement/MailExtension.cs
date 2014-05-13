@@ -282,9 +282,10 @@ namespace Fanex.MailDeliver.Business
                                 Subject = string.Format("Mail Service Error on {0} with App Send Mail Id {1}", DateTime.Now, currentAppId),
                                 Title = string.Format("Mail Service Error with  App Send Mail Id {0}", currentAppId),
                                 Body = string.Format(
-                                "Mail Title: {0}<br/><br/><br/>Mail Subject: {1}<br/><br/><br/>Error Message: {2}<br/><br/><br/>Error Stack Trace:{3}",
+                                "Mail Title: {0}<br/><br/><br/>Mail Subject: {1}<br/><br/><br/>Smtp Sever: {2}<br/><br/><br/>Error Message: {3}<br/><br/><br/>Error Stack Trace:{4}",
                                 mailRecord.Title ?? string.Empty,
                                 mailRecord.Subject ?? string.Empty,
+                                mailRecord.Config != null ? (mailRecord.Config.Setting.Server + ":" + mailRecord.Config.Setting.Port) : string.Empty,
                                 e.Error.Message ?? string.Empty,
                                 e.Error.ToString())
                             });
