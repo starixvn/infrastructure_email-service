@@ -93,31 +93,41 @@ namespace Fanex.MailDeliver.Business.Worker
                             data = message.Body as MailRecord;
                             if (data != null)
                             {
-                                if (data.MailID > 0)
-                                {
-                                    data.IsReady = true;
-                                    SendMail(data);
-                                }
-                                else
-                                {
-                                    //// TODO
-                                    var mailId = 0;
+                                downTime = _maintenanceService.GetDowntimeInfo();
 
-                                    mailId = (int)_mailDeliverBusiness.InsertMailRecord(data);
-
-                                    if (mailId > 0)
+                                if (!downTime.IsDowntime)
+                                {
+                                    if (data.MailID > 0)
                                     {
-                                        LogExtension.LogMessage(string.Format("Stored mail {0}", mailId));
                                         data.IsReady = true;
-                                        data.MailID = mailId;
                                         SendMail(data);
                                     }
                                     else
                                     {
-                                        LogExtension.LogMessage("Store mail failed.");
-                                    }
+                                        //// TODO
+                                        var mailId = 0;
 
-                                    Thread.Sleep(1);
+                                        mailId = (int)_mailDeliverBusiness.InsertMailRecord(data);
+
+                                        if (mailId > 0)
+                                        {
+                                            LogExtension.LogMessage(string.Format("Stored mail {0}", mailId));
+                                            data.IsReady = true;
+                                            data.MailID = mailId;
+                                            SendMail(data);
+                                        }
+                                        else
+                                        {
+                                            LogExtension.LogMessage("Store mail failed.");
+                                        }
+
+                                        Thread.Sleep(1);
+                                    }
+                                }
+                                else
+                                {
+                                    MailExtension.AddMailToQueueForSendingMail(data);
+                                    Thread.Sleep(5000);
                                 }
                             }
                         }
