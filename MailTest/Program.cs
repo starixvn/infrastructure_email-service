@@ -15,6 +15,7 @@ namespace MailTest
     using System.IO;
     using System.Reflection;
     using Fanex.MailDeliver.Model;
+    using System.Collections.Generic;
 
     /// <summary>
     /// First running program.
@@ -47,6 +48,16 @@ namespace MailTest
                             Body = "Body test Body testBody testBody testBody testBod",
                             IsEncrypt = Convert.ToBoolean(ConfigurationManager.AppSettings["isencrypt"])
                         };
+
+                        //mailItem.Body += "Image AlternateView <img src=\"cid:1a2s3d4f5g121\" />";
+                        //mailItem.AlternateView = new List<MailLinkedResource>();
+                        //var resource = new Fanex.MailDeliver.Model.MailLinkedResource(@"C:\Users\ricky.nguyen\Desktop\PT - Google Chrome_2014-06-10_15-31-49.png", FileExtentions.IMG_JPG, "1a2s3d4f5g121");
+                        //mailItem.AlternateView.Add(resource);
+
+                        mailItem.Attachments = new List<MailAttachment>();
+                        var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\20130117_193451.jpg", FileExtentions.IMG_JPG);
+                        //var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\LCC_screenshot.png", FileExtentions.IMG_PNG);
+                        mailItem.Attachments.Add(attachment);
                         client.SendMail(mailItem);
 
                         ////var mailItem = new MailRecord

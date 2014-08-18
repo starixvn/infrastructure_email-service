@@ -75,6 +75,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
     <Content Include="Configurations\StoreProcedureName.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
