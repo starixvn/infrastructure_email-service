@@ -14,6 +14,7 @@ namespace Fanex.MailDeliver.MailServer.Service
     /// <summary>
     /// Windows mail service.
     /// </summary>
+    [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_serviceHost")]
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1400:AccessModifierMustBeDeclared", Justification = "Reviewed.")]
     partial class WinMailService
     {
