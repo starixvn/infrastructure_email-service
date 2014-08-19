@@ -33,8 +33,8 @@ namespace Fanex.MailDeliver.MailServer.Service
             if (disposing && (_components != null))
             {
                 _components.Dispose();
-                
             }
+
             _serviceHost.Close();
             base.Dispose(disposing);
         }
