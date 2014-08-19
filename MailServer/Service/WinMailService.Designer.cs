@@ -30,12 +30,16 @@ namespace Fanex.MailDeliver.MailServer.Service
         /// <param name="disposing">True if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            if (_serviceHost != null)
+            {
+                _serviceHost.Close();
+            }
+
             if (disposing && (_components != null))
             {
                 _components.Dispose();
             }
 
-            _serviceHost.Close();
             base.Dispose(disposing);
         }
 
