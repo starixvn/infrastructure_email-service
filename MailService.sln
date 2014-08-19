@@ -16,11 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.MailDeliver.Core", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.MailDeliver.CheckingSmtp", "Fanex.MailDeliver.CheckingSmtp\Fanex.MailDeliver.CheckingSmtp.csproj", "{7256CCC2-754E-47CE-9C57-960BEB339B0D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{E2A7B5F8-6025-4967-A715-D22B6265CA27}"
-	ProjectSection(SolutionItems) = preProject
-		CodeAnalysis\CodeAnalysisConfiguration.xml = CodeAnalysis\CodeAnalysisConfiguration.xml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
