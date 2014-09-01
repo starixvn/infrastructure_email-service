@@ -211,7 +211,6 @@ namespace Fanex.MailDeliver.Business
                     record.IsReady = true;
                     var outputMessage = string.Empty;
                     SendMail(record, out outputMessage);
-                    
                 }
             }
         }
