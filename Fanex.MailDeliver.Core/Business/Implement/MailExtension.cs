@@ -207,8 +207,11 @@ namespace Fanex.MailDeliver.Business
                 {
                     Fanex.Logging.Logger.Log.Error(ex.Message + "\nMail Subject: " + record.Subject, ex);
                     //// Send without queue
+                    record.MailID = (int)(new MailDeliverBusiness()).InsertMailRecord(record);
+                    record.IsReady = true;
                     var outputMessage = string.Empty;
                     SendMail(record, out outputMessage);
+                    
                 }
             }
         }
