@@ -16,8 +16,6 @@ namespace Fanex.MailDeliver.Business.Worker
     using Fanex.MailDeliver.Business;
     using Fanex.MailDeliver.Business.Implement;
     using Fanex.MailDeliver.Business.Interface;
-    using Fanex.MailDeliver.Core.Business.Implement;
-    using Fanex.MailDeliver.Core.Business.Interface;
     using Fanex.MailDeliver.Core.Infrastructure.Configurations;
     using Fanex.MailDeliver.Core.Infrastructure.Logging;
     using Fanex.MailDeliver.Model;
@@ -28,7 +26,6 @@ namespace Fanex.MailDeliver.Business.Worker
     public class SendMailWorker
     {
         private static IMailDeliverBusiness _mailDeliverBusiness;
-        private static IMaintenanceService _maintenanceService;
 
         /// <summary>
         /// Is Break or not.
@@ -38,7 +35,6 @@ namespace Fanex.MailDeliver.Business.Worker
         public SendMailWorker()
         {
             _mailDeliverBusiness = new MailDeliverBusiness();
-            _maintenanceService = new MaintenanceService();
         }
 
         public bool IsBreak
@@ -84,56 +80,37 @@ namespace Fanex.MailDeliver.Business.Worker
                 {
                     try
                     {
-                        var downTime = _maintenanceService.GetDowntimeInfo();
-
-                        if (!downTime.IsDowntime)
+                        //// do not use timeout anymore
+                        message = msmq.Receive();
+                        data = message.Body as MailRecord;
+                        if (data != null)
                         {
-                            //// do not use timeout anymore
-                            message = msmq.Receive();
-                            data = message.Body as MailRecord;
-                            if (data != null)
+                            if (data.MailID > 0)
                             {
-                                downTime = _maintenanceService.GetDowntimeInfo();
+                                data.IsReady = true;
+                                SendMail(data);
+                            }
+                            else
+                            {
+                                //// TODO
+                                var mailId = 0;
 
-                                if (!downTime.IsDowntime)
+                                mailId = (int)_mailDeliverBusiness.InsertMailRecord(data);
+
+                                if (mailId > 0)
                                 {
-                                    if (data.MailID > 0)
-                                    {
-                                        data.IsReady = true;
-                                        SendMail(data);
-                                    }
-                                    else
-                                    {
-                                        //// TODO
-                                        var mailId = 0;
-
-                                        mailId = (int)_mailDeliverBusiness.InsertMailRecord(data);
-
-                                        if (mailId > 0)
-                                        {
-                                            LogExtension.LogMessage(string.Format("Stored mail {0}", mailId));
-                                            data.IsReady = true;
-                                            data.MailID = mailId;
-                                            SendMail(data);
-                                        }
-                                        else
-                                        {
-                                            LogExtension.LogMessage("Store mail failed.");
-                                        }
-
-                                        Thread.Sleep(1);
-                                    }
+                                    LogExtension.LogMessage(string.Format("Stored mail {0}", mailId));
+                                    data.IsReady = true;
+                                    data.MailID = mailId;
+                                    SendMail(data);
                                 }
                                 else
                                 {
-                                    MailExtension.AddMailToQueueForSendingMail(data);
-                                    Thread.Sleep(5000);
+                                    LogExtension.LogMessage("Store mail failed.");
                                 }
+
+                                Thread.Sleep(1);
                             }
-                        }
-                        else
-                        {
-                            Thread.Sleep(5000);
                         }
                     }
                     catch (MessageQueueException ex)

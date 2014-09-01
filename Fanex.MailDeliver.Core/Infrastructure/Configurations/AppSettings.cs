@@ -24,8 +24,6 @@ namespace Fanex.MailDeliver.Core.Infrastructure.Configurations
                 QueuePath = System.Configuration.ConfigurationManager.AppSettings["queuePath"];
                 NumberOfResendMail = int.Parse(System.Configuration.ConfigurationManager.AppSettings["countResendMail"]);
                 IntervalResendMail = int.Parse(System.Configuration.ConfigurationManager.AppSettings["intervalSendFailedMail"]);
-                EnableCheckUM = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["enableCheckUM"]);
-                UMAddress = System.Configuration.ConfigurationManager.AppSettings["uMAddress"];
             }
             catch (Exception ex)
             {
@@ -38,9 +36,5 @@ namespace Fanex.MailDeliver.Core.Infrastructure.Configurations
         public static int NumberOfResendMail { get; private set; }
 
         public static int IntervalResendMail { get; private set; }
-
-        public static bool EnableCheckUM { get; private set; }
-
-        public static string UMAddress { get; private set; }
     }
 }

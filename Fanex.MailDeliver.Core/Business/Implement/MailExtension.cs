@@ -118,8 +118,10 @@ namespace Fanex.MailDeliver.Business
                     msg.BodyEncoding = Encoding.UTF8;
                     msg.Priority = System.Net.Mail.MailPriority.Normal;
 
+                    //// http://support.microsoft.com/kb/2183292
                     var attInfo = MailSection.Instance.Attachment;
                     var attachments = mailSend.Attachments;
+                    long maxSizeAttachment = 3 * 1024 * 1024;
                     if (attachments != null)
                     {
                         foreach (var attachFile in attachments)
@@ -127,6 +129,11 @@ namespace Fanex.MailDeliver.Business
                             var contType = attInfo.Extensions[attachFile.ContentType.ToString()].Type;
                             attachFile.Content.Seek(0, SeekOrigin.Begin);
                             var attachment = new System.Net.Mail.Attachment(attachFile.Content, attachFile.FileName, contType);
+                            if (attachment.ContentStream.Length > maxSizeAttachment)
+                            {
+                                attachment.TransferEncoding = System.Net.Mime.TransferEncoding.QuotedPrintable;
+                            }
+
                             msg.Attachments.Add(attachment);
                         }
                     }
@@ -198,7 +205,10 @@ namespace Fanex.MailDeliver.Business
                 }
                 catch (Exception ex)
                 {
-                    LogExtension.LogError(ex);
+                    Fanex.Logging.Logger.Log.Error(ex.Message + "\nMail Subject: " + record.Subject, ex);
+                    //// Send without queue
+                    var outputMessage = string.Empty;
+                    SendMail(record, out outputMessage);
                 }
             }
         }
@@ -318,7 +328,7 @@ namespace Fanex.MailDeliver.Business
 
                     //// Resend mail if retry = true and resentcount > 0
                     if (status == false
-                       ////&& mailRecord.CanRetry
+                        ////&& mailRecord.CanRetry
                        && mailRecord.ResentCount > 0)
                     {
                         ////mailRecord.ResentCount--;

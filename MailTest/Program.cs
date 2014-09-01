@@ -48,7 +48,8 @@ namespace MailTest
                         ////mailItem.AlternateView.Add(resource);
 
                         mailItem.Attachments = new List<MailAttachment>();
-                        var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\20130117_193451.jpg", FileExtentions.IMG_JPG);
+                        var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\test.txt", FileExtentions.TEXT);
+                        //var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\issues (3).pdf", FileExtentions.PDF);
                         //var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\LCC_screenshot.png", FileExtentions.IMG_PNG);
                         mailItem.Attachments.Add(attachment);
                         client.SendMail(mailItem);
