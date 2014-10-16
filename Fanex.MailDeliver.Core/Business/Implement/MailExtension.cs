@@ -121,7 +121,6 @@ namespace Fanex.MailDeliver.Business
                     //// http://support.microsoft.com/kb/2183292
                     var attInfo = MailSection.Instance.Attachment;
                     var attachments = mailSend.Attachments;
-                    long maxSizeAttachment = 3 * 1024 * 1024;
                     if (attachments != null)
                     {
                         foreach (var attachFile in attachments)
@@ -129,11 +128,6 @@ namespace Fanex.MailDeliver.Business
                             var contType = attInfo.Extensions[attachFile.ContentType.ToString()].Type;
                             attachFile.Content.Seek(0, SeekOrigin.Begin);
                             var attachment = new System.Net.Mail.Attachment(attachFile.Content, attachFile.FileName, contType);
-                            if (attachment.ContentStream.Length > maxSizeAttachment)
-                            {
-                                attachment.TransferEncoding = System.Net.Mime.TransferEncoding.QuotedPrintable;
-                            }
-
                             msg.Attachments.Add(attachment);
                         }
                     }
@@ -205,7 +199,7 @@ namespace Fanex.MailDeliver.Business
                 }
                 catch (Exception ex)
                 {
-                    Fanex.Logging.Logger.Log.Error(ex.Message + "\nMail Subject: " + record.Subject, ex);
+                    Fanex.Logging.Logger.Log.Info(ex.Message + "\nMail Subject: " + record.Subject);
                     //// Send without queue
                     record.MailID = (int)(new MailDeliverBusiness()).InsertMailRecord(record);
                     record.IsReady = true;
