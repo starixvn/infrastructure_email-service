@@ -86,7 +86,6 @@
     <Compile Include="Infrastructure\Configurations\AppSettings.cs" />
     <Compile Include="Infrastructure\Configurations\LoggerErrorSection.cs" />
     <Compile Include="Infrastructure\Configurations\MailSection.cs" />
-    <Compile Include="Infrastructure\Configurations\StorageAdapter.cs" />
     <Compile Include="Infrastructure\Constant.cs" />
     <Compile Include="Infrastructure\ExtensionMethod\ExtensionClass.cs" />
     <Compile Include="Infrastructure\Logging\LogExtension.cs" />

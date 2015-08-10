@@ -38,29 +38,6 @@ namespace Fanex.MailDeliver.Core.Infrastructure.Configurations
             }
         }
 
-        [ConfigurationProperty("Server", IsDefaultCollection = true)]
-        [ConfigurationCollection(typeof(MailServer),
-            AddItemName = "add",
-            ClearItemsName = "clear",
-            RemoveItemName = "remove")]
-        public MailServer Server
-        {
-            get
-            {
-                var mailServer = base["Server"] as MailServer;
-                return mailServer;
-            }
-        }
-
-        [ConfigurationProperty("active", IsRequired = true)]
-        public string Active
-        {
-            get
-            {
-                return (string)this["active"];
-            }
-        }
-
         [ConfigurationProperty("Attachment", IsRequired = true)]
         public AttachmentElement Attachment
         {

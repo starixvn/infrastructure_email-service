@@ -47,14 +47,14 @@ namespace MailTest
                         ////var resource = new Fanex.MailDeliver.Model.MailLinkedResource(@"C:\Users\ricky.nguyen\Desktop\PT - Google Chrome_2014-06-10_15-31-49.png", FileExtentions.IMG_JPG, "1a2s3d4f5g121");
                         ////mailItem.AlternateView.Add(resource);
 
-                        if (ConfigurationManager.AppSettings["attachment"] != null)
-                        {
-                            mailItem.Attachments = new List<MailAttachment>();
-                            var attachment = new MailAttachment(ConfigurationManager.AppSettings["attachment"].ToString(), FileExtentions.TEXT);
-                            //var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\issues (3).pdf", FileExtentions.PDF);
-                            //var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\LCC_screenshot.png", FileExtentions.IMG_PNG);
-                            mailItem.Attachments.Add(attachment);
-                        }
+                        ////if (ConfigurationManager.AppSettings["attachment"] != null)
+                        ////{
+                        ////    mailItem.Attachments = new List<MailAttachment>();
+                        ////    var attachment = new MailAttachment(ConfigurationManager.AppSettings["attachment"].ToString(), FileExtentions.TEXT);
+                        ////    //var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\issues (3).pdf", FileExtentions.PDF);
+                        ////    //var attachment = new MailAttachment(@"C:\Users\ricky.nguyen\Downloads\LCC_screenshot.png", FileExtentions.IMG_PNG);
+                        ////    mailItem.Attachments.Add(attachment);
+                        ////}
                         client.SendMail(mailItem);
 
                         ////var mailItem = new MailRecord
@@ -72,6 +72,8 @@ namespace MailTest
                         ////var list = client.GetListConfig(string.Empty);
 
                         ////var config = client.GetConfig(1);
+                        //int totalRow = 0;
+                        //var mailList = client.GetListMailByDate(0, DateTime.Now.AddDays(-2), DateTime.Now, ref totalRow, 1, 100, MailStatus.All);
                     }
                     catch (Exception ex)
                     {
