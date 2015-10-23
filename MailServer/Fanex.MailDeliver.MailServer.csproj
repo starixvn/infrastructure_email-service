@@ -94,6 +94,15 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="app.local.config">
+      <DependentUpon>app.config</DependentUpon>
+    </Content>
+    <Content Include="app.uat.config">
+      <DependentUpon>app.config</DependentUpon>
+    </Content>
+    <Content Include="app.pro.config">
+		<DependentUpon>app.config</DependentUpon>
+	</Content>
     <None Include="InstallMailService.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -12,6 +12,7 @@ namespace Fanex.MailDeliver.Core.Infrastructure.Logging
     using System;
     using System.Reflection;
     using System.Threading.Tasks;
+    using Fanex.Logging;
     using log4net;
     using log4net.Config;
     using log4net.Core;
@@ -70,7 +71,7 @@ namespace Fanex.MailDeliver.Core.Infrastructure.Logging
                 //// nLog
                 WriteLog(Level.Error, ex.ToString());
                 //// Fannex Logging
-                Fanex.Logging.Logger.Log.Error(ex.Message, ex);
+                LogService.Error(ex.Message, ex);
             }
         }
 

@@ -14,6 +14,7 @@ namespace Fanex.MailDeliver.MailServer.Service
     using System.ServiceModel;
     using System.ServiceProcess;
     using System.Threading.Tasks;
+    using Fanex.Logging;
     using Fanex.MailDeliver.Business.TableCaching;
     using Fanex.MailDeliver.Business.Worker;
     using Fanex.MailDeliver.Core.Business.Worker;
@@ -76,6 +77,8 @@ namespace Fanex.MailDeliver.MailServer.Service
                 });
                 //// Open new service
                 _serviceHost.Open();
+
+                LogService.Info(string.Format("Service {0} starts at {1}.", this.ServiceName, DateTime.Now));
             }
             catch (Exception ex)
             {
@@ -93,6 +96,7 @@ namespace Fanex.MailDeliver.MailServer.Service
             _task = null;
             _sendMailWorker = null;
             _resendMailWoker = null;
+            LogService.Info(string.Format("Service {0} stops at {1}.", this.ServiceName, DateTime.Now));
         }
     }
 }

@@ -183,6 +183,7 @@ namespace Fanex.MailDeliver.Business
                 IMessageFormatter msgFormat;
                 try
                 {
+                    LogExtension.LogMessage(string.Format("\r\nRecieved Email from WCF: {0}", record.Subject));
                     msgFormat = new BinaryMessageFormatter();
 
                     // Set the formatter to binary

@@ -92,21 +92,32 @@ namespace Fanex.MailDeliver.Business.Worker
                             }
                             else
                             {
+                                LogExtension.LogMessage(string.Format("Got Email from MSMQ: {0}", data.Subject));
                                 //// TODO
                                 var mailId = 0;
 
-                                mailId = (int)_mailDeliverBusiness.InsertMailRecord(data);
+                                try
+                                {
+                                    mailId = (int)_mailDeliverBusiness.InsertMailRecord(data);
 
-                                if (mailId > 0)
-                                {
-                                    LogExtension.LogMessage(string.Format("Stored mail {0}", mailId));
-                                    data.IsReady = true;
-                                    data.MailID = mailId;
-                                    SendMail(data);
+                                    if (mailId > 0)
+                                    {
+                                        LogExtension.LogMessage(string.Format("Stored mail {0}", mailId));
+                                        data.IsReady = true;
+                                        data.MailID = mailId;
+                                        SendMail(data);
+                                    }
+                                    else
+                                    {
+                                        LogExtension.LogMessage("Store mail failed.");
+                                    }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    LogExtension.LogMessage("Store mail failed.");
+                                    LogExtension.LogError(ex);
+                                    data.IsReady = true;
+                                    SendMail(data);
+                                    Thread.Sleep(5000);
                                 }
 
                                 Thread.Sleep(1);
@@ -149,7 +160,7 @@ namespace Fanex.MailDeliver.Business.Worker
             {
                 string error = string.Empty;
                 MailExtension.SendMail(record, out error);
-                LogExtension.LogMessage(string.Format("Sending mail: {0}. Error message: {1}", record.MailID, error));
+                LogExtension.LogMessage(string.Format("Sending mail: {0}.", record.MailID));
             }
         }
     }
