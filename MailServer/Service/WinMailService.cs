@@ -78,7 +78,7 @@ namespace Fanex.MailDeliver.MailServer.Service
                 //// Open new service
                 _serviceHost.Open();
 
-                LogService.Info(string.Format("Service {0} starts at {1}.", this.ServiceName, DateTime.Now));
+                LogService.Info(string.Format("Service Fanex.Email.Service starts at {1}.", this.ServiceName, DateTime.Now));
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace Fanex.MailDeliver.MailServer.Service
             _task = null;
             _sendMailWorker = null;
             _resendMailWoker = null;
-            LogService.Info(string.Format("Service {0} stops at {1}.", this.ServiceName, DateTime.Now));
+            LogService.Info(string.Format("Service Fanex.Email.Service stops at {1}.", this.ServiceName, DateTime.Now));
         }
     }
 }
