@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+ 
+  <Function Name="MailDeliver">
+    <Setting Key="StoreConfig" SpName="MailRecorder_InsConfig" DbName="maintenance"  />
+    <Setting Key="GetConfig" SpName="MailRecorder_GetConfig" DbName="maintenance">
+    </Setting>
+    <Setting Key="StoreMail" SpName="MailRecorder_InsRecord" DbName="maintenance"  />
+    <Setting Key="GetMail" SpName="MailRecorder_GetMail" DbName="maintenance"  />
+    <Setting Key="GetListMail" SpName="MailRecorder_GetListMail" DbName="maintenance"  />
+    <Setting Key="GetListMailByDate" SpName="MailRecorder_GetListMailByDate" DbName="maintenance"  />
+    <Setting Key="StoreMailAttachement" SpName="MailRecorder_InsMailAttachement" DbName="maintenance"  />
+    <Setting Key="GetMailAttachement" SpName="MailRecorder_GetMailAttachement" DbName="maintenance"  />
+    <Setting Key="StoreSetting" SpName="MailRecorder_InsSetting" DbName="maintenance"  />
+    <Setting Key="GetSetting" SpName="MailRecorder_GetSetting" DbName="maintenance"  />
+    <Setting Key="StoreLinkedResource" SpName="MailRecorder_InsMailLinkedResource" DbName="maintenance"  />
+    <Setting Key="GetMailLinkedResource" SpName="MailRecorder_GetMailLinkedResource" DbName="maintenance"  />
+    <Setting Key="StoreFunction" SpName="MailRecorder_InsFunction" DbName="maintenance"  />
+    <Setting Key="GetFunction" SpName="MailRecorder_GetFucntion" DbName="maintenance"  />
+    <Setting Key="UpdateCountSent" SpName="MailRecorder_UpdateCountSent" DbName="maintenance"  />
+    <Setting Key="GetListSetting" SpName="MailRecorder_GetListSetting" DbName="maintenance"  />
+    <Setting Key="GetListConfig" SpName="MailRecorder_GetListConfig" DbName="maintenance"  />
+    <Setting Key="GetListFunction" SpName="MailRecorder_GetListFuntion" DbName="maintenance"  />
+    <Setting Key="UpdateMailStatus" SpName="MailRecorder_UpdateMailStatus" DbName="maintenance"  />
+    <Setting Key="MailRecorder_GetError" SpName="MailRecorder_GetError" DbName="maintenance"  />
+    <Setting Key="MailRecorder_InsError" SpName="MailRecorder_InsError" DbName="maintenance"  />
+  </Function>
+  
+</Functions>

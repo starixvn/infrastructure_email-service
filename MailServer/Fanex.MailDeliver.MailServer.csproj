@@ -106,17 +106,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
+    <Content Include="app.config">
       <SubType>Designer</SubType>
-    </None>
-    <Content Include="app.local.config">
-      <DependentUpon>app.config</DependentUpon>
     </Content>
-    <Content Include="app.uat.config">
-      <DependentUpon>app.config</DependentUpon>
+    <Content Include="Configurations\PRO127\StoreProcedureName.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="app.pro.config">
+    <Content Include="Configurations\PRO135\StoreProcedureName.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.local.config">
       <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.uat.config">
+      <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.pro135.config">
+      <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.pro127.config">
+      <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="InstallMailService.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -129,9 +144,13 @@
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Configurations\StoreProcedureName.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Configurations\LOCAL\StoreProcedureName.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\UAT\StoreProcedureName.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SQL\MailRecorder_UpdateMailStatus.sql" />
     <Content Include="SQL\MailRecorder_GetConfig.sql" />
