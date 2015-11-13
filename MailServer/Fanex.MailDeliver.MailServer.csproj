@@ -115,6 +115,8 @@
     <Content Include="Configurations\PRO135\StoreProcedureName.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Configurations\SIT106\StoreProcedureName.xml" />
+    <Content Include="Configurations\SIT107\StoreProcedureName.xml" />
     <Content Include="Fanex.MailDeliver.MailServer.exe.local.config">
       <DependentUpon>app.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -129,6 +131,16 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Fanex.MailDeliver.MailServer.exe.pro127.config">
+      <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.sit106.config">
+      <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.sit107.config">
       <DependentUpon>app.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
