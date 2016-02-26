@@ -149,6 +149,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.backupMNL.config">
+      <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="InstallMailService.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
