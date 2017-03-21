@@ -40,7 +40,7 @@ namespace Fanex.MailDeliver.Core.Business.Worker
         /// </summary>
         public void Run()
         {
-            while (true == Stop)
+            while (Stop)
             {
                 Thread.Sleep(AppSettings.IntervalResendMail * 1000 * 60);
                 try

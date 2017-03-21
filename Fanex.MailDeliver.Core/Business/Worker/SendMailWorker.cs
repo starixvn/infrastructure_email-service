@@ -55,10 +55,7 @@ namespace Fanex.MailDeliver.Business.Worker
         /// else Store to Database and then send mail.
         /// </summary>
         /// <param name="fromService">Run from service or not.</param>
-        [SuppressMessage(
-            "StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public void Run(bool fromService = false)
         {
             if (fromService)
@@ -76,7 +73,7 @@ namespace Fanex.MailDeliver.Business.Worker
                 ////MailRecord storeData = null;
                 Message message = null;
 
-                while (false == IsBreak)
+                while (!IsBreak)
                 {
                     try
                     {

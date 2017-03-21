@@ -1,4 +1,7 @@
+
+#ignore thumbnails created by windows
 Thumbs.db
+#Ignore files build by Visual Studio
 *.obj
 *.exe
 *.pdb
@@ -10,7 +13,6 @@ Thumbs.db
 *_p.c
 *.ncb
 *.suo
-*.sln.docstates
 *.tlb
 *.tlh
 *.bak
@@ -25,5 +27,29 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-*.vssscc
-$tf*/
+
+OpenCover.bat
+_CodeCoverageReport
+
+*.dic
+*.orig
+/packages/*
+/PrecompiledWeb
+*.suo
+.vs/config/applicationhost.config
+/OpenCover/*
+
+*.min.js
+bundles
+*.css
+*.js.map
+*/**/assets/scripts/**/*.js
+*/**/bundles/**/*.js
+*.ncrunchproject
+*.ncrunchsolution
+
+artifacts/
+_Chutzpah.coverage.html
+
+*.test.html
+src/Alpha.Reports.Site/jsUnitTest.xml

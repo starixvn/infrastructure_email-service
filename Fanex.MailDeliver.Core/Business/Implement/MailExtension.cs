@@ -41,10 +41,7 @@ namespace Fanex.MailDeliver.Business
         /// </summary>
         /// <param name="mailSend">Mail contains all information need be sent.</param>
         /// <param name="message">String message contains error message if send mail process throw error.</param>
-        [SuppressMessage(
-            "StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public static void SendMail(MailRecord mailSend, out string message)
         {
             message = string.Empty;
@@ -325,7 +322,7 @@ namespace Fanex.MailDeliver.Business
 
                     //// Resend mail if retry = true and resentcount > 0
                     if (status == false
-                        ////&& mailRecord.CanRetry
+                       ////&& mailRecord.CanRetry
                        && mailRecord.ResentCount > 0)
                     {
                         ////mailRecord.ResentCount--;
@@ -384,10 +381,7 @@ namespace Fanex.MailDeliver.Business
         /// <param name="mailConfigId">Mail config.</param>
         /// <param name="mailSetting">Mail setting.</param>
         /// <param name="mailRecord">Mail information.</param>
-        [SuppressMessage(
-            "StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         private static void SendMailThroughImplicitSSL(int mailConfigId, MailSetting mailSetting, MailRecord mailRecord)
         {
             SmtpMail oMail = new SmtpMail("TryIt");
