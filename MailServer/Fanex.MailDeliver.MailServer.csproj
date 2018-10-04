@@ -148,6 +148,7 @@
     <Content Include="Fanex.MailDeliver.MailServer.exe.local.config">
       <DependentUpon>app.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Fanex.MailDeliver.MailServer.exe.uat.config">
       <DependentUpon>app.config</DependentUpon>
