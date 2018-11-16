@@ -36,12 +36,12 @@ namespace MailTest
                         {
                             ////MailFrom = "demo@gmail.com",
                             MailTo = ConfigurationManager.AppSettings.Get("mail_to"),
-                            Subject = "Demo Send Mail Subject Test Test Test Test",
-                            Title = "Demo Send Mail Title Test Test Test Test Test",
+                            Subject = "Ricky Test - Demo Send Mail Subject Test Test Test Test\r",
+                            Title = "Ricky Test - Demo Send Mail Title Test Test Test Test Test\n",
                             Body = "Body test Body testBody testBody testBody testBod",
                             IsEncrypt = Convert.ToBoolean(ConfigurationManager.AppSettings["isencrypt"]),
-                            MailCc = "nbhuy89@gmail.com",
-                            MailBcc = "robert.tran@nexcel.vn"
+                            MailCc = "nbhuy89@gmail.com ; troy.vo@nexcel.vn",
+                            MailBcc = "ricky.nguyen@starixsoft.com, troy.vo@starixsoft.com"
                         };
 
                         ////mailItem.Body += "Image AlternateView <img src=\"cid:1a2s3d4f5g121\" />";

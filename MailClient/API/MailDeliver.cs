@@ -1,16 +1,7 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MailDeliver.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ricky.Nguyen" date="2012.9.20">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.9.24">Update StyleCop</change>
-// </history>
-
-namespace Fanex.MailDeliver.MailClient.API
+﻿namespace Fanex.MailDeliver.MailClient.API
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Configuration;
     using System.ServiceModel;
@@ -119,6 +110,13 @@ namespace Fanex.MailDeliver.MailClient.API
                     Util.AttachmentUtil.Format(ref mail);
 
                     mail.CanRetry = canRetry;
+
+                    mail.Subject = FilterSpecialCharacters(mail.Subject);
+                    mail.Title = FilterSpecialCharacters(mail.Title);
+                    mail.MailTo = FilterSpecialCharacterForEmail(mail.MailTo);
+                    mail.MailCc = FilterSpecialCharacterForEmail(mail.MailCc);
+                    mail.MailBcc = FilterSpecialCharacterForEmail(mail.MailBcc);
+                    
                     var stream = MailFormatter.Serialize(mail);
                     var buffer = stream.ToArray();
                     _mailClient.SendMail(buffer);
@@ -128,6 +126,46 @@ namespace Fanex.MailDeliver.MailClient.API
                     throw new Exception("The appsettings key \"app_mail_id\" which didn't support ");
                 }
             }
+        }
+
+        private string FilterSpecialCharacters(string text)
+        {
+            if(string.IsNullOrWhiteSpace(text))
+            {
+                return text;
+            }
+            
+            var filteredText = text
+                .Replace("\r", string.Empty)
+                .Replace("\n", string.Empty)
+                .Replace("\t", string.Empty)
+                .Replace("&nbsp;", " ");
+
+            var specialCharactersConfig = ConfigurationManager.AppSettings["MailService:SpecialCharacters"];
+            if(!string.IsNullOrWhiteSpace(specialCharactersConfig))
+            {
+                var specialCharacters = specialCharactersConfig.Split(',');
+
+                foreach (var specialCharacter in specialCharacters)
+                {
+                    filteredText = filteredText.Replace(specialCharacter, string.Empty);
+                }
+            }
+
+            return filteredText;
+        }
+
+        private string FilterSpecialCharacterForEmail(string emailRaw)
+        {
+            if (string.IsNullOrWhiteSpace(emailRaw))
+            {
+                return emailRaw;
+            }
+            
+            return FilterSpecialCharacters(
+                emailRaw
+                .Replace("  ", string.Empty)
+                .Replace(" ", string.Empty));
         }
 
         /// <summary>
