@@ -10,7 +10,6 @@
 namespace Fanex.MailDeliver.Business
 {
     using System;
-    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Messaging;
@@ -158,13 +157,26 @@ namespace Fanex.MailDeliver.Business
 
                     System.Net.ServicePointManager.ServerCertificateValidationCallback += (s, cert, chain, sslPolicyErrors) => true;
 
-                    client.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
-                    client.SendAsync(msg, mailSend);
+                    SafeSmtpClientSendMessage(client, msg, mailSend);
                 }
             }
             catch (Exception ex)
             {
                 message = LogMailError(mailSend, ex);
+            }
+        }
+
+        private static void SafeSmtpClientSendMessage(System.Net.Mail.SmtpClient smtpClient, MailMessage msg, MailRecord mailRecord)
+        {
+            try
+            {
+                smtpClient.Send(msg);
+                UpdateMailStatus(mailRecord, true, null);
+            }
+            catch (Exception e)
+            {
+                LogExtension.LogError(e);
+                UpdateMailStatus(mailRecord, false, e);
             }
         }
 
@@ -253,56 +265,6 @@ namespace Fanex.MailDeliver.Business
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// This function will be called after mail sent complete.
-        /// </summary>
-        /// <param name="sender">Object sender.</param>
-        /// <param name="e">Completed arguments.</param>
-        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
-        {
-            var mailRecord = (MailRecord)e.UserState;
-            bool status = e.Error == null;
-            if (status == false)
-            {
-                LogExtension.LogError(e.Error);
-                var currentAppId = mailRecord.AppID > 0 ? mailRecord.AppID : (mailRecord.Config != null ? mailRecord.Config.AppID : 0);
-
-                try
-                {
-                    if (currentAppId != LoggerErrorSection.Instance.AppSendMailId)
-                    {
-                        if (LoggerErrorSection.Instance.AppSendMailId > 0)
-                        {
-                            AddMailToQueueForSendingMail(new MailRecord
-                            {
-                                AppID = LoggerErrorSection.Instance.AppSendMailId,
-                                Config = new MailConfig
-                                {
-                                    AppID = LoggerErrorSection.Instance.AppSendMailId
-                                },
-                                MailTo = LoggerErrorSection.Instance.ToMails,
-                                Subject = string.Format("Mail Service Error on {0} with App Send Mail Id {1}", DateTime.Now, currentAppId),
-                                Title = string.Format("Mail Service Error with  App Send Mail Id {0}", currentAppId),
-                                Body = string.Format(
-                                "Mail Title: {0}<br/><br/><br/>Mail Subject: {1}<br/><br/><br/>Smtp Sever: {2}<br/><br/><br/>Error Message: {3}<br/><br/><br/>Error Stack Trace:{4}",
-                                mailRecord.Title ?? string.Empty,
-                                mailRecord.Subject ?? string.Empty,
-                                mailRecord.Config != null ? (mailRecord.Config.Setting.Server + ":" + mailRecord.Config.Setting.Port) : string.Empty,
-                                e.Error.Message ?? string.Empty,
-                                e.Error.ToString())
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogExtension.LogError(ex);
-                }
-            }
-
-            UpdateMailStatus(mailRecord, status, e.Error);
         }
 
         /// <summary>
