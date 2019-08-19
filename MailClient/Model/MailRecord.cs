@@ -12,6 +12,7 @@ namespace Fanex.MailDeliver.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Mail;
     using System.Runtime.Serialization;
 
     public enum MailStatus : int
@@ -215,6 +216,13 @@ namespace Fanex.MailDeliver.Model
 
         [DataMember]
         public bool IsEncrypt
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public MailPriority Priority
         {
             get;
             set;

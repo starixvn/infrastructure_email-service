@@ -39,9 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.3-beta1\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -64,6 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MailClient\Fanex.MailDeliver.MailClient.csproj">
+      <Project>{913ea85e-0247-4e48-b9b1-279e2eb10380}</Project>
+      <Name>Fanex.MailDeliver.MailClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

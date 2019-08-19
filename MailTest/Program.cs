@@ -2,13 +2,13 @@
 
 namespace MailTest
 {
+    using Fanex.MailDeliver.Model;
     using System;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Reflection;
-    using Fanex.MailDeliver.Model;
-    using System.Collections.Generic;
 
     /// <summary>
     /// First running program.
@@ -31,17 +31,26 @@ namespace MailTest
                 {
                     try
                     {
+                        var bodyText = "Body test Body testBody testBody testBody testBod";
+                        var bodyFile = ConfigurationManager.AppSettings.Get("body_file");
+                        if(!string.IsNullOrWhiteSpace(bodyFile)
+                            && File.Exists(bodyFile))
+                        {
+                            bodyText = File.ReadAllText(bodyFile);
+                        }
+
                         ////#endregion test insert mail record
                         var mailItem = new MailRecord
                         {
                             ////MailFrom = "demo@gmail.com",
                             MailTo = ConfigurationManager.AppSettings.Get("mail_to"),
-                            Subject = "Ricky Test - Demo Send Mail Subject Test Test Test Test\r",
-                            Title = "Ricky Test - Demo Send Mail Title Test Test Test Test Test\n",
-                            Body = "Body test Body testBody testBody testBody testBod",
+                            Subject = "Ricky Test 1 - Demo Send Mail Subject Test Test Test Test\r",
+                            Title = "Ricky Test 1 - Demo Send Mail Title Test Test Test Test Test\n",
+                            Body = bodyText,
                             IsEncrypt = Convert.ToBoolean(ConfigurationManager.AppSettings["isencrypt"]),
-                            MailCc = "nbhuy89@gmail.com ; troy.vo@nexcel.vn",
-                            MailBcc = "ricky.nguyen@starixsoft.com, troy.vo@starixsoft.com"
+                            MailCc = "nbhuy89@gmail.com",
+                            MailBcc = "ricky.nguyen@starixsoft.com",
+                            Priority = System.Net.Mail.MailPriority.High
                         };
 
                         ////mailItem.Body += "Image AlternateView <img src=\"cid:1a2s3d4f5g121\" />";
@@ -51,9 +60,14 @@ namespace MailTest
 
                         if (ConfigurationManager.AppSettings["attachment"] != null)
                         {
-                            mailItem.Attachments = new List<MailAttachment>();
-                            var attachment = new MailAttachment(ConfigurationManager.AppSettings["attachment"].ToString(), FileExtentions.TEXT);
-                            mailItem.Attachments.Add(attachment);
+                            var attchmentFilePath = ConfigurationManager.AppSettings["attachment"].ToString();
+
+                            if (!string.IsNullOrWhiteSpace(attchmentFilePath) && File.Exists(attchmentFilePath))
+                            {
+                                mailItem.Attachments = new List<MailAttachment>();
+                                var attachment = new MailAttachment(attchmentFilePath, FileExtentions.TEXT);
+                                mailItem.Attachments.Add(attachment);
+                            }
                         }
 
                         client.SendMail(mailItem);
