@@ -57,3 +57,6 @@ src/Alpha.Reports.Site/jsUnitTest.xml
 /.vs/MailService/v15/Server/sqlite3/storage.ide
 /.vs/MailService/v15/Server/sqlite3/storage.ide-shm
 /.vs/MailService/v15/Server/sqlite3/storage.ide-wal
+/.vs/MailService/v16/TestStore/0/000-0000.testlog
+/.vs/MailService/v16/TestStore/0/testlog.manifest
+/.vs

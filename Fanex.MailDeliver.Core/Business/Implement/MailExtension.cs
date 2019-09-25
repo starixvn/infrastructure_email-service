@@ -178,6 +178,18 @@ namespace Fanex.MailDeliver.Business
                 LogExtension.LogError(e);
                 UpdateMailStatus(mailRecord, false, e);
             }
+            finally
+            {
+                try
+                {
+                    smtpClient.Dispose();
+                    msg.Dispose();
+                }
+                catch (Exception e)
+                {
+                    LogExtension.LogError(e);
+                }
+            }
         }
 
         /// <summary>
