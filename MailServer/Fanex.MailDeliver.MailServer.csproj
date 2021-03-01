@@ -178,6 +178,10 @@
       <DependentUpon>app.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Fanex.MailDeliver.MailServer.exe.aws.config">
+      <DependentUpon>app.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="InstallMailService.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
